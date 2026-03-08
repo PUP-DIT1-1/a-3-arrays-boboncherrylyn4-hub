@@ -1,0 +1,70 @@
+import java.util.Scanner;
+
+public class StudentRecordArraySystem {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        String[] names = new String[10];
+        double[] grades = new double[10];
+        double sum = 0;
+
+        // Input 10 students
+        for (int i = 0; i < 10; i++) {
+            System.out.print("Enter student name: ");
+            names[i] = input.nextLine();
+
+            System.out.print("Enter grade: ");
+            grades[i] = input.nextDouble();
+            input.nextLine();
+
+            sum += grades[i];
+        }
+
+        // Compute average
+        double average = sum / 10;
+        System.out.println("\nAverage grade: " + average);
+
+        // Sort grades ascending (Bubble Sort)
+        for (int i = 0; i < grades.length - 1; i++) {
+            for (int j = 0; j < grades.length - i - 1; j++) {
+                if (grades[j] > grades[j + 1]) {
+
+                    // swap grades
+                    double tempGrade = grades[j];
+                    grades[j] = grades[j + 1];
+                    grades[j + 1] = tempGrade;
+
+                    // swap names to match grades
+                    String tempName = names[j];
+                    names[j] = names[j + 1];
+                    names[j + 1] = tempName;
+                }
+            }
+        }
+
+        // Display sorted list
+        System.out.println("\nStudents sorted by grade (Ascending):");
+        for (int i = 0; i < 10; i++) {
+            System.out.println(names[i] + " - " + grades[i]);
+        }
+
+        // Search for student
+        System.out.print("\nEnter student name to search: ");
+        String search = input.nextLine();
+        boolean found = false;
+
+        for (int i = 0; i < 10; i++) {
+            if (names[i].equalsIgnoreCase(search)) {
+                System.out.println("Student found: " + names[i] + " - Grade: " + grades[i]);
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Student not found.");
+        }
+
+        input.close();
+    }
+}
